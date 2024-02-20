@@ -23,8 +23,11 @@ module.exports.createAd = (req, res) => {
 
 // Запросить все рекламы
 module.exports.getAds = (req, res) => {
-  AdPlacementModel.find({})
+  Ad.find({})
     .populate("place")
     .then((ads) => res.send({ data: ads }))
     .catch((err) => res.status(500).send({ message: "Произошла ошибка" }));
 };
+
+// Запросить все рекламы с конкретного экрана
+// module.exports.getAdsByScreen = (req, res) => {};
