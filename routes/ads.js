@@ -5,21 +5,25 @@ const {
   getAdsByScreen,
   getAd,
   updateAd,
+  deleteAd,
 } = require("../controllers/ads");
 
-// Контроллер создания рекламы
+// Роутер создания рекламы
 router.post("/", createAd);
 
-// Контроллер получения всех реклам
+// Роутер получения всех реклам
 router.get("/", getAds);
 
-// Контроллер получения конкретной рекламы
+// Роутер получения конкретной рекламы
 router.get("/:id", getAd);
 
-// Контроллер получения всех реклам с одного экрана
+// Роутер получения всех реклам с одного экрана
 router.get("/:id/ads", getAdsByScreen);
 
-// Контроллер изменения рекламы
+// Роутер изменения рекламы
 router.patch("/:id", updateAd);
+
+// Роутер удаления рекламы
+router.delete("/:id", deleteAd);
 
 module.exports = router;
