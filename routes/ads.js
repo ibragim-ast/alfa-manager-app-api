@@ -18,7 +18,7 @@ router.get("/", getAds);
 router.get("/:id", getAd);
 
 // Роутер получения всех реклам с одного экрана
-router.get("/:id/ads", getAdsByScreen);
+router.get("/screen/:screenId", getAdsByScreen);
 
 // Роутер изменения рекламы
 router.patch("/:id", updateAd);

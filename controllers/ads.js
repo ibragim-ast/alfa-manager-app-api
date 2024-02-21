@@ -1,4 +1,4 @@
-const { default: mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const Ad = require("../models/ad");
 
 // Контроллер создания рекламы
@@ -22,7 +22,7 @@ module.exports.createAd = (req, res) => {
     });
 };
 
-// Контроллер запроса все= реклам
+// Контроллер запроса всех реклам
 module.exports.getAds = (req, res) => {
   Ad.find({})
     .populate("place")
@@ -33,9 +33,10 @@ module.exports.getAds = (req, res) => {
 // Контроллер запроса всех реклам с конкретного экрана
 module.exports.getAdsByScreen = (req, res) => {
   console.log("Запрос на получение всех реклам с конкретного экрана получен");
-  const screenId = req.params.id;
-  console.log(id);
-  Ad.find({ place: mongoose.Types.ObjectId(screenId) })
+  const screenId = req.params.screenId;
+  console.log(screenId);
+
+  Ad.find({ place: screenId })
     .populate("place")
     .then((ad) => res.send({ data: ad }))
     .catch((err) => res.status(500).send({ message: "Произошла ошибка" }));
