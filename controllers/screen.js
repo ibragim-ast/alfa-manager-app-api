@@ -1,6 +1,6 @@
 const Screen = require("../models/screen");
 
-// Создать экран
+// Контроллер создания экрана
 module.exports.createScreen = (req, res) => {
   const { name, address } = req.body;
   Screen.create({ name, address })
@@ -8,7 +8,7 @@ module.exports.createScreen = (req, res) => {
     .catch((err) => res.status(500).send({ message: "Произошла ошибка" }));
 };
 
-// Запросить все экраны
+// Контроллер запроса всех экранов
 module.exports.getScreens = (req, res) => {
   console.log("Запрос выдачи всех экранов получен");
   Screen.find({})
@@ -16,21 +16,21 @@ module.exports.getScreens = (req, res) => {
     .catch((err) => res.status(500).send({ message: "Произошла ошибка" }));
 };
 
-// Запросить конкретный экран
+// Контроллер запроса конкретного экранов
 module.exports.getScreen = (req, res) => {
   Screen.findById(req.params.id)
     .then((screen) => res.send({ data: screen }))
     .catch((err) => res.status(500).send({ message: "Произошла ошибка" }));
 };
 
-// Обновить экран
+// Контроллер обновления экрана
 module.exports.updateScreen = (req, res) => {
   Screen.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((screen) => res.send({ data: screen }))
     .catch((err) => res.status(500).send({ message: "Произошла ошибка" }));
 };
 
-// Удалить экран
+// Контроллер удаления экрана
 module.exports.deleteScreen = (req, res) => {
   Screen.deleteOne(req.params.id)
     .then((screen) => res.send({ data: screen }))

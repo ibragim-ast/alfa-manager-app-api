@@ -32,9 +32,7 @@ module.exports.getAds = (req, res) => {
 
 // Контроллер запроса всех реклам с конкретного экрана
 module.exports.getAdsByScreen = (req, res) => {
-  console.log("Запрос на получение всех реклам с конкретного экрана получен");
   const screenId = req.params.screenId;
-  console.log(screenId);
 
   Ad.find({ place: screenId })
     .populate("place")
