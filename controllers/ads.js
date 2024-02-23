@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Ad = require("../models/ad");
+const NotFoundError = require("../errors/NotFoundError");
 
 // Контроллер создания рекламы
 module.exports.createAd = (req, res) => {
@@ -26,8 +27,19 @@ module.exports.createAd = (req, res) => {
 module.exports.getAds = (req, res) => {
   Ad.find({})
     .populate("place")
-    .then((ads) => res.send({ data: ads }))
-    .catch((err) => res.status(500).send({ message: "Произошла ошибка" }));
+    .then((ads) => {
+      if (!ads) {
+        throw new NotFoundError("Нет реклам в базе");
+      }
+      res.send({ data: ads });
+    })
+    .catch((err) => {
+      if (err instanceof NotFoundError) {
+        res.status(HTTP_STATUS_NOT_FOUND).send({ message: err.message });
+      } else {
+        res.status(500).send({ message: "Произошла ошибка" });
+      }
+    });
 };
 
 // Контроллер запроса всех реклам с конкретного экрана
